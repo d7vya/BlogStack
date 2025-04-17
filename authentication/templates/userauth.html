@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth</title>
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        form input {
+            display: block;
+            margin: 2vh 0;
+
+        }
+
+        form {
+            border: 1px solid black;
+            border-radius: 7px;
+            padding: 2vh 3vw;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form action="/auth/{{title}}" method="post">
+        {%csrf_token%}
+        <small>{{message}}</small>
+
+        {% if title == 'sign-up' %}
+        <input type="email" name="useremail" placeholder="Email Address">
+        <input type="text" name="fname" placeholder=" First name">
+        <input type="text" name="lname" placeholder="Last name">
+
+        {%endif%}
+        <input type="text" name="username" placeholder='Username'>
+        <input type="password" name="password" placeholder="password">
+
+        <button type="submit">{{title}}</button>
+    </form>
+
+</body>
+
+</html>
