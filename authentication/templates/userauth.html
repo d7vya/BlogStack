@@ -12,39 +12,131 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: rgb(248, 247, 247);
         }
 
-        form input {
+        form input,
+        form input:focus {
             display: block;
-            margin: 2vh 0;
+            margin: 0 0 1vh 0;
+            outline: none;
+            border: 1px solid rgba(199, 196, 196, 0.418);
+            font-size: 15px;
+            border-radius: 5px;
+            padding: 0.6vh 0.8vw;
+        }
 
+        h2 {
+            font-size: 25px;
+            text-transform: capitalize;
+            margin: 0;
+            text-align: start;
+
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        div {
+            background-color: white;
+            width: fit-content;
+            max-width: 90vw;
+            min-width: 300px;
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 1px 1px 5px rgb(228, 227, 227), -1px -1px 5px rgb(228, 227, 227);
+            border-radius: 7px;
+            padding: 3vh 1vw;
+            margin: 0;
         }
 
         form {
-            border: 1px solid black;
-            border-radius: 7px;
-            padding: 2vh 3vw;
+
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            align-items: center;
+            height: fit-content;
+
+
+        }
+
+        button {
+            padding: 0.7vw;
+            text-align: center;
+            width: 70%;
+            font-size: 15px;
+            text-transform: capitalize;
+            border: none;
+            display: block;
+            margin: 2vh auto;
+            background-color: rgba(0, 0, 255, 0.849);
+            color: white;
+            border-radius: 5px;
+
+
+
+
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            color: rgba(49, 48, 48, 0.733);
+            margin: 0;
+            width: 100%;
+        }
+
+        small {
+            font-size: 12px;
+            color: rgba(49, 48, 48, 0.733);
+            margin-bottom: 1vh;
+        }
+
+        article {
+            margin: 0 0 1vh 0;
+            padding: auto;
         }
     </style>
 </head>
 
 <body>
+    <div>
+        <form action="/auth/{{title}}" method="post">
+            {%csrf_token%}
 
-    <form action="/auth/{{title}}" method="post">
-        {%csrf_token%}
-        <small>{{message}}</small>
+            <h2>{{title}}</h2>
+            <small>{{message}}</small>
+            <br>
 
-        {% if title == 'sign-up' %}
-        <input type="email" name="useremail" placeholder="Email Address">
-        <input type="text" name="fname" placeholder=" First name">
-        <input type="text" name="lname" placeholder="Last name">
+            {% if title == 'sign-up' %} <label>Email address
+                <input type="email" name="useremail"></label>
+            <label>First name
+                <input type="text" name="fname"></label>
+            <label>Last name
+                <input type="text" name="lname">
+            </label>
 
-        {%endif%}
-        <input type="text" name="username" placeholder='Username'>
-        <input type="password" name="password" placeholder="password">
+            {%endif%}
+            <label>Username
+                <input type="text" name="username"></label>
+            <label>Password
+                <input type="password" name="password"></label>
 
-        <button type="submit">{{title}}</button>
-    </form>
+            <button type="submit">{{title}}</button>
+            <small>
+                {% if title == "sign-in" %}
+                Don’t have an account? <a href="/auth/sign-up">Sign up</a>
+                {% else %}
+                Already registered? <a href="/auth/sign-in">Sign in</a>
+                {% endif %}
+            </small>
+        </form>
+
+    </div>
 
 </body>
 
